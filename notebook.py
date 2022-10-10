@@ -1,8 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
+# ---
+# jupyter:
+#   jupytext:
+#     text_representation:
+#       extension: .py
+#       format_name: light
+#       format_version: '1.5'
+#       jupytext_version: 1.14.1
+#   kernelspec:
+#     display_name: kaggle-cms
+#     language: python
+#     name: kaggle-cms
+# ---
 
 # imports and whatnot
 # get the data
@@ -10,16 +18,15 @@ import requests
 import urllib.parse
 import zipfile
 import os
+import pandas as pd
 
-
-# In[4]:
-
-
+# +
 # Download the data file
 # - URL Query string
 scheme = 'https'
 host = 'data.cms.gov'
-fileName = '/data-api/v1/dataset/128d9a55-49d9-4be7-b33b-ce236bebdeca/data-viewer'
+fileName = '/data-api/v1/dataset/\
+128d9a55-49d9-4be7-b33b-ce236bebdeca/data-viewer'
 query = {
     '_format': 'csv'
 }
@@ -36,13 +43,12 @@ os.makedirs(os.path.dirname(zipFileName), exist_ok=True)
 with open(zipFileName, 'wb') as f:
     f.write(r.content)
 
-#unzip file into working directory
+# Unzip file into working directory
 with zipfile.ZipFile(zipFileName, 'r') as z:
     z.extractall('.')
 
-
-# In[ ]:
-
+# -
 
 # Verify we can read dataset
-
+df = pd.read_csv('./COVID_19_Nursing_Home_Data_09_25_2022.csv')
+df
