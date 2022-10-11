@@ -12,7 +12,7 @@ def main():
         data = json.loads(f.read())
 
         os.makedirs(
-            os.path.dirname(data["kaggle-data-directory"]),
+            data["kaggle-data-directory"],
             exist_ok=True
         )
 
