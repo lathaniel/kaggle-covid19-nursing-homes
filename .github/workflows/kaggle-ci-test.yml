@@ -1,6 +1,6 @@
-name: Kaggle CI
+name: Test Kaggle CI
 on: 
-  push:
+  pull_request:
     branches:
       - main
 
@@ -35,4 +35,4 @@ jobs:
         KAGGLE_USERNAME: ${{ secrets.KAGGLE_USER }}
         KAGGLE_KEY: ${{ secrets.KAGGLE_API_KEY }}
       # Use the kernel-metadata.json to specify args
-      run: kaggle k push -p .
+      run: echo Done
