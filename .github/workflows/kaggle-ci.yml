@@ -18,7 +18,7 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Create Kaggle Metadata
-      run: py create_kaggle_metadata.py
+      run: python create_kaggle_metadata.py
 
     - name: Edit the notebook py script
       run: |
@@ -28,7 +28,7 @@ jobs:
 
     - name: Convert py to ipynb
       run: jupytext --to ipynb notebook.py
-      
+
     - name: Upload notebook to Kaggle
       env:
         # Do not leak your credentials.
