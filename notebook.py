@@ -15,18 +15,38 @@
 # # Initial Setup
 #
 # I often prefer to run my notebooks outside of Kaggle.  
+#
 # As a result, I specify at the top whether I am running the notebook locally or on Kaggle
 
 # + vscode={"languageId": "python"}
 localEnv = True
+kaggleDataDir = './kaggle-data' if localEnv == True \
+    else '/kaggle/input/cms-covid-19-nursing-homes-dataset'
+# -
+
+# # Import packages
 
 # + vscode={"languageId": "python"}
-# imports and whatnot
 import pandas as pd
 
 # + vscode={"languageId": "python"}
 # Verify we can read dataset
-kaggleDataDir = './kaggle-data' if localEnv == True \
-    else '/kaggle/input/cms-covid-19-nursing-homes-dataset'
 df = pd.read_csv(f'{kaggleDataDir}/COVID_19_Nursing_Home_Data_09_25_2022.csv')
-df
+# -
+
+# ## Initial data exploration
+#
+
+# + vscode={"languageId": "python"}
+# Remove unsubmitted data
+df = df.loc[df['Submitted Data']=='Y']
+
+# + vscode={"languageId": "python"}
+# Occupancy percentage (all locations)
+print('Occupancy Percentage: {}%'.format(
+    round(
+        df['Total Number of Occupied Beds'].sum() / 
+            df['Number of All Beds'].sum(),
+        4
+    )* 100
+)) 
