@@ -7,7 +7,9 @@
   "is_private": "true",
   "enable_gpu": "false",
   "enable_internet": "true",
-  "dataset_sources": [],
+  "dataset_sources": [
+    "lathaniel/CMS-Covid-19-Nursing-Homes-dataset"
+  ],
   "competition_sources": [],
   "kernel_sources": []
 }
