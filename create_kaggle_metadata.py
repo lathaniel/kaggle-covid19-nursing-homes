@@ -10,11 +10,11 @@ def main():
         data = json.loads(f.read())
 
         # Write the dataset-metadata file
-        with open(data["kaggle-data-directory"] + '/dataset-metadata.json', 'w') as w:
+        with open(data["kaggle-data-directory"] + '/dataset-metadata.json', 'w+') as w:
             w.write(json.dumps(data["dataset-metadata"], indent=4))
         
         # Write the dataset-metadata file
-        with open('./kernel-metadata.json', 'w') as w:
+        with open('./kernel-metadata.json', 'w+') as w:
             w.write(json.dumps(data["kernel-metadata"], indent=4))
 
 
