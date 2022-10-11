@@ -2,3 +2,4 @@ notebook
 jupytext
 pandas
 requests
+kaggle

@@ -1,0 +1,25 @@
+name: Kaggle CI
+on: 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Upload Kernel:
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install requirements
+      run: pip install -r requirements
+    - name: Convert py to ipynb
+      run: jupytext --to ipynb notebook.
+    - name: Upload notebook to Kaggle
+      env:
+        # Do not leak your credentials.
+        KAGGLE_USERNAME: ${{ secrets.KAGGLE_USER }}
+        KAGGLE_KEY: ${{ secrets.KAGGLE_API_KEY }}
+      # Use the kernel-metadata.json to specify args
+      run: kaggle k push -p .
