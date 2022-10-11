@@ -14,7 +14,7 @@
 
 # # Initial Setup
 #
-# I often prefer to run my notebooks outside of Kaggle.
+# I often prefer to run my notebooks outside of Kaggle.  
 # As a result, I specify at the top whether I am running the notebook locally or on Kaggle
 
 # + vscode={"languageId": "python"}
@@ -26,6 +26,7 @@ import pandas as pd
 
 # + vscode={"languageId": "python"}
 # Verify we can read dataset
-kaggleDataDir = '/kaggle/input' if localEnv == False else './kaggle-data'
+kaggleDataDir = './kaggle-data' if localEnv == True \
+    else '/kaggle/input/cms-covid-19-nursing-homes-dataset'
 df = pd.read_csv(f'{kaggleDataDir}/COVID_19_Nursing_Home_Data_09_25_2022.csv')
 df
