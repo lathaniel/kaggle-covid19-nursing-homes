@@ -21,7 +21,7 @@
 # + vscode={"languageId": "python"}
 localEnv = True
 kaggleDataDir = './kaggle-data' if localEnv == True \
-    else '/kaggle/input/cms-covid-19-nursing-homes-dataset'
+    else '/kaggle/input/CMS-Covid-19-Nursing-Homes-dataset'
 # -
 
 # # Import packages
