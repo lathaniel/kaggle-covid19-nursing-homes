@@ -12,43 +12,41 @@
 #     name: kaggle-cms
 # ---
 
-# imports and whatnot
-# get the data
-import requests
-import urllib.parse
-import zipfile
-import os
-import pandas as pd
+# # Initial Setup
+#
+# I often prefer to run my notebooks outside of Kaggle.  
+#
+# As a result, I specify at the top whether I am running the notebook locally or on Kaggle
 
-# +
-# Download the data file
-# - URL Query string
-scheme = 'https'
-host = 'data.cms.gov'
-fileName = '/data-api/v1/dataset/\
-128d9a55-49d9-4be7-b33b-ce236bebdeca/data-viewer'
-query = {
-    '_format': 'csv'
-}
-# Send request
-r = requests.get(
-    f'{scheme}://{host}/{fileName}?{urllib.parse.urlencode(query)}',
-    allow_redirects=True
-)
-
-zipFileName = './web/data-download.zip'
-os.makedirs(os.path.dirname(zipFileName), exist_ok=True)
-
-# Download file
-with open(zipFileName, 'wb') as f:
-    f.write(r.content)
-
-# Unzip file into working directory
-with zipfile.ZipFile(zipFileName, 'r') as z:
-    z.extractall('.')
-
+# + vscode={"languageId": "python"}
+localEnv = True
+kaggleDataDir = './kaggle-data' if localEnv == True \
+    else '/kaggle/input/CMS-Covid-19-Nursing-Homes-dataset'
 # -
 
+# # Import packages
+
+# + vscode={"languageId": "python"}
+import pandas as pd
+
+# + vscode={"languageId": "python"}
 # Verify we can read dataset
-df = pd.read_csv('./COVID_19_Nursing_Home_Data_09_25_2022.csv')
-df
+df = pd.read_csv(f'{kaggleDataDir}/COVID_19_Nursing_Home_Data_09_25_2022.csv')
+# -
+
+# ## Initial data exploration
+#
+
+# + vscode={"languageId": "python"}
+# Remove unsubmitted data
+df = df.loc[df['Submitted Data']=='Y']
+
+# + vscode={"languageId": "python"}
+# Occupancy percentage (all locations)
+print('Occupancy Percentage: {}%'.format(
+    round(
+        df['Total Number of Occupied Beds'].sum() / 
+            df['Number of All Beds'].sum(),
+        4
+    )* 100
+)) 
