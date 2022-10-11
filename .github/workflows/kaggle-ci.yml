@@ -15,7 +15,7 @@ jobs:
     - name: Install requirements
       run: pip install -r requirements.txt
     - name: Convert py to ipynb
-      run: jupytext --to ipynb notebook.
+      run: jupytext --to ipynb notebook.py
     - name: Upload notebook to Kaggle
       env:
         # Do not leak your credentials.
