@@ -12,3 +12,6 @@ ipython kernel install --name "kaggle-cms" --user
 # Pull data from CMS (or kaggle potentialy)
 python src/get_cms_data.py
 rm -rf web
+
+# Convert script to jupyer notebook
+jupytext --to ipynb notebook.py
