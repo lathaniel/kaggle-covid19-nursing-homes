@@ -13,15 +13,22 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: 3.9
+
     - name: Install requirements
       run: pip install -r requirements.txt
+
+    - name: Create Kaggle Metadata
+      run: py create_kaggle_metadata.py
+
     - name: Edit the notebook py script
       run: |
         sed -i 's/^localEnv = True$/localEnv = False/' notebook.py
         sed -i 's/^#\s*display_name: .*$/#     display_name: "Python 3"/' notebook.py
         sed -i 's/^#\s*name: .*$/#     name: python3/' notebook.py
+
     - name: Convert py to ipynb
       run: jupytext --to ipynb notebook.py
+      
     - name: Upload notebook to Kaggle
       env:
         # Do not leak your credentials.
