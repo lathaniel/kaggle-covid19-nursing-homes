@@ -9,5 +9,6 @@ python -m pip install -r requirements.txt
 # restart VS Code :( to properly activate the kernel
 ipython kernel install --name "kaggle-cms" --user
 
-# Create a local directory for kaggle data
-mkdir -p kaggle-data && kaggle datasets init -p kaggle-data
+# Pull data from CMS (or kaggle potentialy)
+python src/get_cms_data.py
+rm -rf web
